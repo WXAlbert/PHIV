@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>中普投资</title>
+		<link rel="stylesheet" type="text/css" href="css/init-mobi.css"/>
+		<link rel="stylesheet" type="text/css" href="css/resources.css"/>
+		<style>
+			body{background-color: #fff; background:-webkit-linear-gradient(top, #8fc21f,  #8fc21f  32%, #fff 55%);}
+			
+			/*导航*/
+			.xc-bar-nav{}
+			.xc-bar-nav .xc-title{}
+			.xc-pull-left{margin-left: 10px;}
+			.xc-pull-left .xc-icon{display: inline-block; width: 1.2em; height: 1.2em;}
+			.xc-pull-left .xc-nav-label{color: #fff;}
+			.xc-container{padding-bottom: 44px; overflow: hidden;}			
+			.xc-bar-control{padding: 5px 10px; border-top: solid 1px #e7e7e7;}
+			
+			/* container */
+			#yield{margin: 2em auto 1em; width: 12em; height: 12em; position: relative; color: #fff;}
+			#yield  canvas{width: 100%; height: 100%; position: absolute; left: 0; top: 0;}
+			#yield .para-v{font-size: 3em; padding: 1.2em 1em 0; text-align: center;}
+			#yield .para-v b{font-size: 0.5em;}
+			#yield .para-k{font-size: 0.8em; padding: 0 3em;  text-align: center;}
+			#yield .para-k .xc-icon{width: 1em; height: 1em; display: inline-block; vertical-align: middle;}
+			#yield .para-k .label{vertical-align: middle}
+			
+			#para{display: table; width: 100%;}
+			#para .para-group{display: table-cell; width: 33.33%; text-align: center;}
+			#para .para-v span, .para-k{font-size: 0.8em;}
+			#para .para-k{color: #8fc21f;}
+			
+			#progress{margin:  2em 10px 0; padding: 1em 0; border-bottom: solid 1px #e7e7e7; overflow: hidden;}
+			#progress .rate{text-align: right;}
+			#progress .xc-progress-bar{margin: 10px 0; height: 8px; border-radius: 5px; background-color: #0097c9;}
+			#progress .xc-progress-bar b{background-color: #ddd;}
+			#progress .para-k{color: #929292;}
+			
+			#remark{font-size: 0.8em; margin: 1em 10px;}
+			#remark .label{color: #929292;}
+			#protocol{padding: 0.2em 0.5em; border: solid 1px #929292; border-radius: 3px;}
+			#protocol:active{background-color: #ccc;}
+			
+			/* footer */
+			.control-btn{display: block; height: 32px; line-height: 32px; text-align: center; color: #fff; background-color: #F64A4A;}
+			.control-btn:link{color: #fff;}
+			.control-btn:visited{color: #fff;}
+			.control-btn:active{background-color: #d63A3A;}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="xc-bar xc-bar-nav">
+			<a class="xc-btn-nav xc-pull-left" href="javascript:history.back();">
+				<i class="xc-icon icon-arrow-left"></i>
+				<span class="xc-nav-label">车辆抵押标的</span>
+			</a>
+		</header>
+		
+		<div class="xc-container">
+			<div id="yield" class="para-group">
+				<p class="para-v">18<b>%</b></p>
+				<p class="para-k">
+					<i class="xc-icon icon-rmb"></i>
+					<span class="label">预期年化收益</span>
+				</p>
+				<canvas width="300" height="300" data-percent="0.18"></canvas>
+			</div>
+			
+			<div id="para">
+				<div class="para-group">
+					<p class="para-v"><em>3</em><span>个月</span></p>
+					<p class="para-k">期限</p>
+				</div>
+				<div class="para-group">
+					<p class="para-v"><em>100</em><span>元</span></p>
+					<p class="para-k">起投</p>
+				</div>
+				<div class="para-group">
+					<p class="para-v"><span>全额担保</span></p>
+					<p class="para-k">担保</p>
+				</div>
+			</div>
+			
+			<div id="progress">
+				<p class="rate">75%</p>
+				<div class="xc-progress-bar clearfix">
+					<b class="fr" style="width: 75%;"></b>
+				</div>
+				<div class="fl para-group">
+					<p class="para-v">18,000,000</p>
+					<p class="para-k">项目总额</p>
+				</div>
+				<div class="fr para-group">
+					<p class="para-v">5,000,000</p>
+					<p class="para-k">剩余金额</p>
+				</div>
+			</div>
+			
+			<div id="remark">
+				<span class="label">还款方式 | </span>
+				<span>一次性还本付息</span>
+				<a id="protocol" class="fr" href="#">查看协议范本</a>
+			</div>
+		</div>
+		
+		<footer class="xc-bar xc-bar-control">
+			<a class="control-btn" href="#">购买</a>
+		</footer>
+		<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var paraGroup = document.querySelectorAll(".para-group");
+				
+				init();
+				
+				function init(){
+					showPies();	
+				}
+				
+				//页面加载完成后跑一遍这个函数，根据canvas上的data-percent为每个canvas刷环状图
+				function showPies(){
+					var cvs, ctx, r, percent, imageData;
+						
+					[].forEach.call(paraGroup, function(o, i, arr){
+						console.log(o, i);
+						cvs = o.querySelector("canvas");
+    
+						if (cvs){
+							ctx = cvs.getContext('2d');
+							r = cvs.width / 2;
+							percent = cvs.dataset.percent;
+							endAngle = ( -1 - 2 * percent ) * Math.PI;
+							
+							ctx.beginPath(); 
+							ctx.arc(r, r, r - 16, -Math.PI, Math.PI, false); 
+							ctx.lineWidth = 6.0; 
+							ctx.strokeStyle = "#fff"; 
+							ctx.stroke();
+							
+							ctx.beginPath(); 
+							ctx.arc(r, r, r - 16, -Math.PI, endAngle, true); 
+							ctx.lineWidth = 6.0; 
+							ctx.strokeStyle = "#c1e472"; 
+							ctx.stroke();
+							
+							ctx.beginPath();
+							ctx.arc(r, r, r - 16, -Math.PI, Math.PI, false); 
+							ctx.lineWidth = 14.0; 
+							ctx.strokeStyle = "rgba(255,255,255,0.2)"; 
+							ctx.stroke();
+						}
+					});
+				}
+
+			});
+		</script>
+	</body>
+</html>

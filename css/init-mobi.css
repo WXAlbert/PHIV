@@ -1,0 +1,42 @@
+/*初始化默认css*/
+@charset "utf-8";
+*{margin:0; padding:0;}img{border:0;}li{list-style:none;}em,i{font-style:normal;}
+* {-webkit-box-sizing: border-box;-webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0);}
+*:not(input,textarea){-webkit-box-sizing: border-box;-webkit-user-select:none;}input[type=button]{-webkit-appearance:none;outline:none}
+a,a:link,a:visited,a:hover,a:active{color: #000; text-decoration:none; border: none;}::-webkit-input-placeholder { color:#666; }input:-moz-placeholder { color:#666; }
+iframe {width: 0;height: 0;line-height: 0;overflow: hidden}
+html {-ms-touch-action: none;}
+input,textarea{-webkit-user-select: auto;}
+body{background:#fff; font-family:"Microsoft YaHei",Helvetica; font-size: 1em;}
+html,body{height: 100%;}
+/* css common */
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
+.ellipsis{text-overflow: ellipsis; overflow: hidden;  word-break: break-all; white-space: nowrap;}
+.fl{float: left;}
+.fr{float: right;}
+
+/*********************** "css  "xc-" common" ***********************/
+.xc-icon{background-repeat: no-repeat; background-position: center; background-size: cover;}
+.xc-progress-bar{width: 100%; height: 8px; border-radius: 5px; overflow: hidden;}
+.xc-progress-bar b{display: block; height: 100%;}
+/************************   "xc-"   styles   **************************/
+.xc-bar{height: 44px; position: fixed; left: 0; right: 0; z-index: 10;}
+.xc-bar-nav{top: 0; line-height: 40px; }
+.xc-btn-nav{}
+.xc-btn-nav .xc-icon{vertical-align: middle;}
+.xc-btn-nav .xc-nav-label{vertical-align: middle;}
+
+.xc-title{text-align: center;}
+h1.xc-title{font-size: 1.2em;}
+h2.xc-title{font-size: 1em;}
+.xc-bar .xc-title{display: inline-block; width: auto; margin: 0 auto; line-height: 40px;  position: absolute; left: 40px; right: 40px; overflow: hidden; text-overflow: ellipsis;}
+.xc-table-view{}
+.xc-table-view-cell{padding: 10px; overflow: hidden;}
+
+.xc-bar-tab{display: table; width: 100%; bottom: 0;}
+.xc-tab-item{font-size: 1em; display: table-cell; text-align: center;}
+.xc-tab-item .xc-icon{display: block; margin: 2px auto;}
+.xc-tab-item .xc-tab-label{margin: 0;}
+
+.xc-bar-control{bottom: 0;}
