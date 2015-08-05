@@ -7,24 +7,27 @@
 		<title>中普投资</title>
 		<link rel="stylesheet" type="text/css" href="css/init-mobi.css"/>
 		<link rel="stylesheet" type="text/css" href="css/resources.css"/>
+		<link rel="stylesheet" type="text/css" href="js/iscroll/scrollbar.css"/>
 		<style>
-			body{background-color: #fff; background:-webkit-linear-gradient(top, #8fc21f,  #8fc21f  32%, #fff 55%);}
+			body{background-color: #29323e;}
+			.bg-black{background-color: #29323e;}
 			
 			/*导航*/
 			.xc-bar-nav{}
-			.xc-bar-nav .xc-title{}
-			.xc-pull-left{margin-left: 10px;}
+			.xc-bar-nav .xc-title{font-size: 1.2em; top: 0; height: 44px; line-height: 44px; color: #fff;}
+			
+			.xc-pull-left{font-size: 1.2em; margin-left: 10px;}
 			.xc-pull-left .xc-icon{display: inline-block; width: 1.2em; height: 1.2em;}
 			.xc-pull-left .xc-nav-label{color: #fff;}
-			.xc-container{padding-bottom: 44px; overflow: hidden;}			
-			.xc-bar-control{padding: 5px 10px; border-top: solid 1px #e7e7e7;}
+			.xc-container{ /*padding-top: 44px; padding-bottom: 44px;*/ overflow: hidden;}			
+			.xc-bar-control{padding: 5px 10px; border-top: solid 1px #e7e7e7; background-color: #fff;}
 			
 			/* container */
-			#yield{margin: 2em auto 1em; width: 12em; height: 12em; position: relative; color: #fff;}
+			#yield{margin: 0 auto 1em; width: 12em; height: 12em; position: relative; color: #fff;}
 			#yield  canvas{width: 100%; height: 100%; position: absolute; left: 0; top: 0;}
 			#yield .para-v{font-size: 3em; padding: 1.2em 1em 0; text-align: center;}
 			#yield .para-v b{font-size: 0.5em;}
-			#yield .para-k{font-size: 0.8em; padding: 0 3em;  text-align: center;}
+			#yield .para-k{font-size: 0.8em; padding: 0 2em;  text-align: center;}
 			#yield .para-k .xc-icon{width: 1em; height: 1em; display: inline-block; vertical-align: middle;}
 			#yield .para-k .label{vertical-align: middle}
 			
@@ -33,7 +36,7 @@
 			#para .para-v span, .para-k{font-size: 0.8em;}
 			#para .para-k{color: #8fc21f;}
 			
-			#progress{margin:  2em 10px 0; padding: 1em 0; border-bottom: solid 1px #e7e7e7; overflow: hidden;}
+			#progress{margin:  0 10px; padding: 1em 0; border-bottom: solid 1px #e7e7e7; overflow: hidden;}
 			#progress .rate{text-align: right;}
 			#progress .xc-progress-bar{margin: 10px 0; height: 8px; border-radius: 5px; background-color: #0097c9;}
 			#progress .xc-progress-bar b{background-color: #ddd;}
@@ -42,69 +45,195 @@
 			#remark{font-size: 0.8em; margin: 1em 10px;}
 			#remark .label{color: #929292;}
 			#protocol{padding: 0.2em 0.5em; border: solid 1px #929292; border-radius: 3px;}
-			#protocol:active{background-color: #ccc;}
+			#protocol.act{background-color: #ccc !important;}
 			
-			/* footer */
+			/* 底部控制栏 */
 			.control-btn{display: block; height: 32px; line-height: 32px; text-align: center; color: #fff; background-color: #F64A4A;}
 			.control-btn:link{color: #fff;}
 			.control-btn:visited{color: #fff;}
 			.control-btn:active{background-color: #d63A3A;}
+			
+			/* iscroll插件 listview样式 */
+			#scroller_wrapper {position:absolute; z-index:1; top: 0; bottom: 40px; width:100%; overflow:auto;}
+			#scroller {position:relative; -webkit-touch-callout:none; -webkit-tap-highlight-color:rgba(0,0,0,0); float:left; width:100%; padding:0;}
+			#scroller .list-view {position:relative; list-style:none; width:100%; text-align:left;}
+			#scroller .list-item{padding: 40px 0;}
+			#pullUp, #pullDown{width: 12em; margin: 0 auto; line-height: none; background: none; border: none; text-align: center;}
+			/* iscroll插件 listview样式 end*/
+			
+			#product_info{background:-webkit-linear-gradient(top, #8fc21f,  #8fc21f  32%, #fff 55%); background-repeat:no-repeat;}
+			#buy_info.list-item{margin-top: 40px; padding-top: 0; background-color: #fff;}
+			
+			.xc-container{padding-bottom: 44px;}
+			.xc-table-view-cell{padding: 0; border-top: solid 2px #8fc21f; border-bottom: solid 10px #f5f5f5;}
+			.xc-bar-tab{border-top: solid 1px #8fc21f; background-color: #fff;}
+			
+			/* nav */
+			.topbar{height: auto; padding: 10px; background-color: #f5f5f5;}
+			#nav{display: table; width: 100%; border: solid 2px #8fc21f; border-radius: 3px;}
+			#nav li{display:table-cell;}
+			#nav li a{display: block; height: 2em; line-height: 2em; text-align:center; color: #8fc21f; overflow:hidden;}
+			#nav li a:hover{text-decoration: none; color:#dedede;}
+			#nav li.xc-current a{background:#8fc21f; color:#fff;}
+			
+			/*选项卡切换显示页*/
+			.xc-control-content{padding: 10px;}
+			.icon-protect{width: 1em; height: 1em;}
+			.section-title{margin: 1em 0;}
+			.section-content{padding: 1em 0; min-height: 6em; border-top: solid 1px #e7e7e7;}
+			.report-table{width: 100%; border: solid 1px #e5e5e5; text-align: center;}
+			.report-table tr, .report-table tr{height: 2.5em; line-height: 2.5em;}
+			.report-table th{background-color: #f1f1f1;}
+			.report-table tr:nth-child(odd){background-color: #fcfcfc;}
 		</style>
 	</head>
 
 	<body>
-		
-		<header class="xc-bar xc-bar-nav">
+		<header id="topBar" class="xc-bar xc-bar-nav">
 			<a class="xc-btn-nav xc-pull-left" href="javascript:history.back();">
 				<i class="xc-icon icon-arrow-left"></i>
 				<span class="xc-nav-label">车辆抵押标的</span>
 			</a>
+			<div class="xc-title" style="display: none;">
+				车辆抵押标的
+			</div>
 		</header>
 		
-		<div class="xc-container">
-			<div id="yield" class="para-group">
-				<p class="para-v">18<b>%</b></p>
-				<p class="para-k">
-					<i class="xc-icon icon-rmb"></i>
-					<span class="label">预期年化收益</span>
-				</p>
-				<canvas width="300" height="300" data-percent="0.18"></canvas>
-			</div>
-			
-			<div id="para">
-				<div class="para-group">
-					<p class="para-v"><em>3</em><span>个月</span></p>
-					<p class="para-k">期限</p>
+		<div id="scroller_wrapper" class="xc-container">
+			<div id="scroller">
+				<div id="pullDown">
+					<span class="ui-icon pullDownIcon"></span><span class="pullDownLabel">查看产品详情</span>
 				</div>
-				<div class="para-group">
-					<p class="para-v"><em>100</em><span>元</span></p>
-					<p class="para-k">起投</p>
-				</div>
-				<div class="para-group">
-					<p class="para-v"><span>全额担保</span></p>
-					<p class="para-k">担保</p>
-				</div>
-			</div>
-			
-			<div id="progress">
-				<p class="rate">75%</p>
-				<div class="xc-progress-bar clearfix">
-					<b class="fr" style="width: 75%;"></b>
-				</div>
-				<div class="fl para-group">
-					<p class="para-v">18,000,000</p>
-					<p class="para-k">项目总额</p>
-				</div>
-				<div class="fr para-group">
-					<p class="para-v">5,000,000</p>
-					<p class="para-k">剩余金额</p>
-				</div>
-			</div>
-			
-			<div id="remark">
-				<span class="label">还款方式 | </span>
-				<span>一次性还本付息</span>
-				<a id="protocol" class="fr" href="#">查看协议范本</a>
+						
+				<ul id="listView" class="list-view">
+						<li id="product_info" class="list-item">
+							<div id="yield" class="para-group">
+								<p class="para-v">18<b>%</b></p>
+								<p class="para-k">
+									<i class="xc-icon icon-rmb"></i>
+									<span class="label">预期年化收益</span>
+								</p>
+								<canvas width="300" height="300" data-percent="0.18"></canvas>
+							</div>
+							
+							<div id="para">
+								<div class="para-group">
+									<p class="para-v"><em>3</em><span>个月</span></p>
+									<p class="para-k">期限</p>
+								</div>
+								<div class="para-group">
+									<p class="para-v"><em>100</em><span>元</span></p>
+									<p class="para-k">起投</p>
+								</div>
+								<div class="para-group">
+									<p class="para-v"><span>全额担保</span></p>
+									<p class="para-k">担保</p>
+								</div>
+							</div>
+							
+							<div id="progress">
+								<p class="rate">75%</p>
+								<div class="xc-progress-bar clearfix">
+									<b class="fr" style="width: 75%;"></b>
+								</div>
+								<div class="fl para-group">
+									<p class="para-v">18,000,000</p>
+									<p class="para-k">项目总额</p>
+								</div>
+								<div class="fr para-group">
+									<p class="para-v">5,000,000</p>
+									<p class="para-k">剩余金额</p>
+								</div>
+							</div>
+							
+							<div id="remark">
+								<span class="label">还款方式 | </span>
+								<span>一次性还本付息</span>
+								<a id="protocol" class="fr" href="#">查看协议范本</a>
+							</div>	
+						</li>
+						
+						<li id="buy_info" class="list-item hide">
+							<div class="topbar">
+								<nav id="nav" class="xc-segmented-control">
+									<li class="xc-current"><a href="#section_1">投资保障</a></li>
+									<li><a href="#section_2">借款人信息</a></li>
+									<li><a href="#section_3">购买列表</a></li>
+								</nav>
+							</div>
+							
+							<div id="container" class="xc-segmented-content">
+								<div class="xc-control-content" id="section_1">
+									<p class="xc-icon-label ">
+										<i class="xc-icon icon-protect"></i><span class="xc-label">三重保障方式</span>
+									</p>
+									<section>
+										<h3 class="section-title">第一层</h3>
+										<p class="section-content">中普的贷款风控审查极为严格，让平台的标的安全更有保障，对每位借款人进行反复校验。让标的更有保障。</p>
+									</section>
+									<section>
+										<h3 class="section-title">第二层</h3>
+										<p class="section-content">如果借款用户出现逾期，平台将在第一时间启用风险保障金对理财用户进行先行赔付， 保障每一位理财户的资金安全。</p>
+									</section>
+									<section>
+										<h3 class="section-title">第三层</h3>
+										<p class="section-content">如果风险保障金短缺，将采用担保公司赔付机制，拥有雄厚实力的实业担保公司将对我们平台出现的逾期与坏账进行赔付，这是同类P2P公司所没有的赔付环节，真正保障理财人的利益。</p>
+									</section>
+								</div>
+								<div class="xc-control-content section" id="section_2" style="display: none;">
+									<p class="xc-icon-label ">
+										<i class="xc-icon icon-protect"></i><span class="xc-label">个人基本信息</span>
+									</p>
+									<section>
+										<h3 class="section-title">借款用途</h3>
+										<p class="section-content">房屋装修</p>
+									</section>
+									<section>
+										<h3 class="section-title">借款说明</h3>
+										<p class="section-content">
+											重庆锦通建设（集团）有限公司： 
+											          兹由于我司果园港立交收费管理用房项目追赶工期，所需资金匮乏。现特向集团公司申请借款叁拾万圆整，此款定于2013年10月22日还清此款项。  
+											特此说明  
+											
+											                           重庆锦通建设（集团）有限公司一分公司 
+											  
+											                                                                     2013-10-16
+										</p>
+									</section>
+								</div>
+								<div class="xc-control-content section" id="section_3" style="display: none;">
+									<table class="report-table">
+										<thead>
+											<th><span class="section-title">投标人</span></th>
+											<th><span class="section-title">投标金额</span></th>
+											<th><span class="section-title">投标时间</span></th>
+										</thead>
+										<tbody>
+											<tr>
+												<td>yuanyuan</td>
+												<td>￥200,000,00元</td>
+												<td>2015.09.09 14:30</td>
+											</tr>
+											<tr>
+												<td>yuanyuan</td>
+												<td>￥200,000,00元</td>
+												<td>2015.09.09 14:30</td>
+											</tr>
+											<tr>
+												<td>yuanyuan</td>
+												<td>￥200,000,00元</td>
+												<td>2015.09.09 14:30</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</li>
+				</ul>
+								
+				<div id="pullUp">
+					<span class="ui-icon pullUpIcon"></span><span class="pullUpLabel">查看购买详情</span>
+				</div>				
 			</div>
 		</div>
 		
@@ -112,14 +241,146 @@
 			<a class="control-btn" href="#">购买</a>
 		</footer>
 		<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/iscroll/iscroll.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			$(function(){
-				var paraGroup = document.querySelectorAll(".para-group");
-				
+				var paraGroup = document.querySelectorAll(".para-group"),
+					$listItem = $('#scroller .list-item'),
+					$topBar = $("#topBar");
+				//调用iscroll插件需要的变量
+				var myScroll, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset;
+				var $productInfo = $('#product_info'),
+					$buyInfo = $('#buy_info'),
+					$navLabel = $('.xc-nav-label'),
+					$navTitle = $('.xc-title'),
+					$protocol = $('#protocol'),
+					$navLi = $('#nav li'),
+					$navItem = $('#nav a'),
+					$ctrlContent = $('.xc-control-content');
+					
 				init();
 				
-				function init(){
+				function init(){				
+					$listItem.css('minHeight', window.innerHeight - 40);
 					showPies();	
+					initScroll();
+					bind();
+				}
+				
+				function bind(){
+					//初始化绑定iScroll控件 
+					document.addEventListener('touchmove', function(e) {
+						e.preventDefault();
+					}, false);
+					//
+					$protocol.bind('touchstart', function(){
+						$protocol.addClass('act');
+					});
+					$protocol.bind('touchend', function(){
+						$protocol.removeClass('act');
+					});		
+					
+					$navItem.bind('click', function(e){
+						e.preventDefault();
+						var $this = $(this),
+							id = $this.attr('href').slice(1);
+						$navLi.removeClass('xc-current');
+						$this.parent('li').addClass('xc-current');
+						$ctrlContent.hide();
+						$('#' +id).show();
+					});
+				}
+				
+				//初始化iScroll插件
+				function initScroll() {
+					pullDownEl = document.getElementById('pullDown');
+					pullDownOffset = pullDownEl.offsetHeight;
+					pullUpEl = document.getElementById('pullUp');
+					pullUpOffset = pullUpEl.offsetHeight;
+					myScroll = new iScroll('scroller_wrapper', {
+						scrollbarClass: 'myScrollbar',
+						/* 重要样式 */
+						useTransition: false,
+						/* 此属性不知用意，本人从true改为false */
+						topOffset: pullDownOffset,
+						onRefresh: function() {
+							if (pullDownEl.className.match('loading')) {
+								pullDownEl.className = '';
+								pullDownEl.querySelector('.pullDownLabel').innerHTML = '查看产品详情';
+							} else if (pullUpEl.className.match('loading')) {
+								pullUpEl.className = '';
+								pullUpEl.querySelector('.pullUpLabel').innerHTML = '查看购买详情';
+							}
+						},
+						onScrollMove: function() {
+							if (this.y > 5 && !pullDownEl.className.match('flip')) {
+								pullDownEl.className = 'flip';
+								pullDownEl.querySelector('.pullDownLabel').innerHTML = '松手开始加载...';
+								this.minScrollY = 0;
+							} else if (this.y < 5 && pullDownEl.className.match('flip')) {
+								pullDownEl.className = '';
+								pullDownEl.querySelector('.pullDownLabel').innerHTML = '查看产品详情';
+								this.minScrollY = -pullDownOffset;
+							} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+								pullUpEl.className = 'flip';
+								pullUpEl.querySelector('.pullUpLabel').innerHTML = '松手开始加载...';
+								this.maxScrollY = this.maxScrollY;
+							} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+								pullUpEl.className = '';
+								pullUpEl.querySelector('.pullUpLabel').innerHTML = '查看购买详情';
+								this.maxScrollY = pullUpOffset;
+							}
+						},
+						onScrollEnd: function() {
+							if (pullDownEl.className.match('flip')) {
+								pullDownEl.className = 'loading';
+								pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';
+								pullDownAction(); // Execute custom function (ajax call?)
+							} else if (pullUpEl.className.match('flip')) {
+								pullUpEl.className = 'loading';
+								pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';
+								pullUpAction(); // Execute custom function (ajax call?)
+							}
+						}
+					});
+					setTimeout(function() {
+						document.getElementById('scroller_wrapper').style.left = '0';
+					}, 800);
+				}					
+			
+				/**
+				 * 下拉刷新 （自定义实现此方法）
+				 * myScroll.refresh();		// 数据加载完成后，调用界面更新方法
+				 */
+				function pullDownAction() {					
+					setTimeout(function() { // <-- Simulate network congestion, remove setTimeout from production!
+						/*这里是刷新代码*/
+						console.log('pull down');
+						$buyInfo.addClass('hide');
+						$productInfo.removeClass('hide');
+						$navLabel.show();
+						$navTitle.hide();
+//						$topBar.removeClass('bg-black');
+						myScroll.refresh(); //数据加载完成后，调用界面更新方法   Remember to refresh when contents are loaded (ie: on ajax completion)
+					}, 1000); // <-- Simulate network congestion, remove setTimeout from production!			
+				}
+			
+				/**
+				 * 滚动翻页 （自定义实现此方法）
+				 * myScroll.refresh();		// 数据加载完成后，调用界面更新方法
+				 */
+				function pullUpAction() {
+					setTimeout(function() { // <-- Simulate network congestion, remove setTimeout from production!
+						/*这里是加载更多代码*/
+						console.log('pull up');
+						$productInfo.addClass('hide');
+						$buyInfo.removeClass('hide');
+						$navLabel.hide();
+						$navTitle.show();
+//						$topBar.addClass('bg-black');
+						myScroll.refresh(); // 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)		
+						myScroll.scrollTo(0, 0, 200);
+					}, 1000); // <-- Simulate network congestion, remove setTimeout from production!
 				}
 				
 				//页面加载完成后跑一遍这个函数，根据canvas上的data-percent为每个canvas刷环状图
@@ -127,7 +388,7 @@
 					var cvs, ctx, r, percent, imageData;
 						
 					[].forEach.call(paraGroup, function(o, i, arr){
-						console.log(o, i);
+						//console.log(o, i);
 						cvs = o.querySelector("canvas");
     
 						if (cvs){
