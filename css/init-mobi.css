@@ -32,6 +32,9 @@ html,body{height: 100%;}
 .fr{float: right;}
 .hide{display: none;}
 
+.ft-b{font-weight: bold;}
+.ft-red{color: #ff7167;}
+.ft-blue{color: #0066cc;}
 /*********************** "css  "xc-" common" ***********************/
 .xc-icon{background-repeat: no-repeat; background-position: center; background-size: cover;}
 .xc-progress-bar{width: 100%; height: 8px; border-radius: 5px; overflow: hidden;}
@@ -40,6 +43,13 @@ html,body{height: 100%;}
 .xc-icon-label{}
 .xc-icon-label .xc-icon, .xc-icon-label .xc-label{display: inline-block; vertical-align: middle;}
 .xc-icon-label .xc-label{margin: 0 5px;}
+
+.xc-input-group{padding: 5px 0;}
+.xc-input-group .label{padding: 5px 0;}
+.xc-input-wrap{padding: 5px 0; border: solid 1px #c9c9c9; border-radius: 5px;}
+.xc-input-wrap input{width: 100%; border: none; text-indent: 5px; outline:none;}
+
+.xc-mask{display: none; position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 10; background-color: rgba(0,0,0,0.5);}
 /************************   "xc-"   styles   **************************/
 .xc-bar{height: 44px; position: fixed; left: 0; right: 0; z-index: 10;}
 .xc-bar-nav{top: 0; line-height: 40px; }
